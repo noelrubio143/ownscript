@@ -1,0 +1,27 @@
+{
+  "stats_addr": ":8404",
+  "listeners": [
+    {
+      "name": "web_frontend",
+      "bind": ":8080",
+      "balance": "roundrobin",
+      "check_interval_sec": 5,
+      "check_timeout_sec": 2,
+      "connect_timeout_sec": 3,
+      "backends": [
+        { "addr": "127.0.0.1:9001", "weight": 1 },
+        { "addr": "127.0.0.1:9002", "weight": 1 },
+        { "addr": "127.0.0.1:9003", "weight": 2 }
+      ]
+    },
+    {
+      "name": "another_service",
+      "bind": ":8081",
+      "balance": "leastconn",
+      "backends": [
+        { "addr": "127.0.0.1:9101" },
+        { "addr": "127.0.0.1:9102" }
+      ]
+    }
+  ]
+}
